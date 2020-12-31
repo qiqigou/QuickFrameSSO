@@ -1,0 +1,32 @@
+@using System.Diagnostics
+
+@{
+    var version = FileVersionInfo.GetVersionInfo(typeof(IdentityServer4.Hosting.IdentityServerMiddleware).Assembly.Location).ProductVersion.Split('+').First();
+}
+
+<div class="welcome-page">
+    <h1>
+        <img src="~/icon.jpg">
+        基于IdentityServer4实现的单点登录系统
+        <small class="text-muted">(version @version)</small>
+    </h1>
+
+    <ul>
+        <li>
+            <a href="~/.well-known/openid-configuration">发现文档端点</a>
+        </li>
+        <li>
+            <a href="~/Account/Login">登录</a>
+        </li>
+        <li>
+            <a href="~/diagnostics">查看当前用户声明</a>
+        </li>
+        <li>
+            <a href="~/grants">查看已授权列表</a>
+        </li>
+        <li>
+            <a href="https://github.com/identityserver/IdentityServer4">IdentityServer4源码地址</a>,
+            <a href="https://github.com/IdentityServer/IdentityServer4/tree/main/samples">IdentityServer4官方示例</a>
+        </li>
+    </ul>
+</div>

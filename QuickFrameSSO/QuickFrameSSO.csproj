@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>8.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>bfa212db-4646-4637-b109-251ce7c63bbc</UserSecretsId>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IdentityServer4.EntityFramework" Version="[4.1.1]" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="[3.1.8]" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="[3.1.8]" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="[3.1.8]" />
+        <PackageReference Include="Serilog.AspNetCore" Version="[3.4.0]" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="[3.1.8]" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="[5.6.3]" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="[3.1.8]">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+</Project>
