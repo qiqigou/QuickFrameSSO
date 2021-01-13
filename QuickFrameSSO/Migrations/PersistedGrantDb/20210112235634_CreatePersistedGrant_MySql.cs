@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuickFrameSSO.Migrations.PersistedGrantDb
 {
-    public partial class Grants : Migration
+    public partial class CreatePersistedGrant_MySql : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

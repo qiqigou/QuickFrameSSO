@@ -57,10 +57,29 @@ namespace QuickFrameSSO
                     },
                     AllowOfflineAccess = true,
                     AllowRememberConsent = true,//允许记住对客户端的授权
-                    RedirectUris = { "http://localhost:8000/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost:8000" },
+                    RedirectUris =
+                    {
+                        "http://localhost:8000/oauth2-redirect.html",
+                        "http://localhost/oauth2-redirect.html",
+                        "https://onlyoned.com:9000/oauth2-redirect.html",
+                        "https://www.onlyoned.com:9000/oauth2-redirect.html",
+                    },
+                    PostLogoutRedirectUris =
+                    {
+                        "http://localhost:8000",
+                        "http://localhost",
+                        "https://onlyoned.com:9000",
+                        "https://www.onlyoned.com:9000",
+
+                    },
                     AccessTokenLifetime = 600,
-                    AllowedCorsOrigins = { "http://localhost:8000" },
+                    AllowedCorsOrigins =
+                    {
+                        "http://localhost:8000",
+                        "http://localhost",
+                        "https://onlyoned.com:9000",
+                        "https://www.onlyoned.com:9000"
+                    },
                     AllowAccessTokensViaBrowser = true,
                     AllowedScopes =
                     {

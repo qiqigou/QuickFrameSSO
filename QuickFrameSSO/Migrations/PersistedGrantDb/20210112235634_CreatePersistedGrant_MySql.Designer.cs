@@ -9,53 +9,54 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuickFrameSSO.Migrations.PersistedGrantDb
 {
     [DbContext(typeof(PersistedGrantDbContext))]
-    [Migration("20200624171018_Grants")]
-    partial class Grants
+    [Migration("20210112235634_CreatePersistedGrant_MySql")]
+    partial class CreatePersistedGrant_MySql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0");
+                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("longtext")
                         .HasMaxLength(50000);
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("Expiration")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("SessionId")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("SubjectId")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.HasKey("UserCode");
@@ -71,43 +72,43 @@ namespace QuickFrameSSO.Migrations.PersistedGrantDb
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("ConsumedTime")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("longtext")
                         .HasMaxLength(50000);
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("Expiration")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("SessionId")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("SubjectId")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("Key");

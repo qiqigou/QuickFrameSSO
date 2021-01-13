@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using QuickFrameSSO.Controllers;
+using System;
 
 namespace QuickFrameSSO
 {
@@ -24,17 +25,15 @@ namespace QuickFrameSSO
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            var connectionString = _configuration.GetConnectionString("MySQL");
             var builder = services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
-                /*
-                 * 使用Emit覆盖原有的ClaimTypes定义
-                 * (https://identityserver4.readthedocs.io/en/latest/topics/resources.html)
-                 */
+                //使用Emit覆盖原有的ClaimTypes定义
+                //https://identityserver4.readthedocs.io/en/latest/topics/resources.html
                 options.EmitStaticAudienceClaim = true;
             })
             .AddTestUsers(TestUsers.Users)
@@ -42,21 +41,35 @@ namespace QuickFrameSSO
             .AddInMemoryApiResources(Config.ApiResources)
             .AddInMemoryClients(Config.Clients)
             .AddInMemoryIdentityResources(Config.IdentityResources)
-            //.AddConfigurationStore(options =>
-            //{
-            //    /*该功能以后在扩展*/
-            //    //从数据库中获取(clients, resources, CORS)
-            //    options.ConfigureDbContext = builder => builder.UseSqlite(connectionString);
-            //})
+            .AddConfigurationStore(options =>
+            {
+                //从数据库中获取(clients, resources, CORS)
+                options.ConfigureDbContext = builder
+                => builder.UseMySql(connectionString,
+                sql =>
+                {
+                    sql.MigrationsAssembly(nameof(QuickFrameSSO));
+                    sql.ServerVersion(new Version(8, 0, 22), ServerType.MySql);
+                    sql.CharSetBehavior(CharSetBehavior.NeverAppend);
+                });
+            })
             .AddOperationalStore(options =>
             {
                 //从数据库中获取(codes, tokens, consents)
-                options.ConfigureDbContext = builder => builder.UseSqlite(connectionString);
+                options.ConfigureDbContext = builder
+                => builder.UseMySql(connectionString,
+                sql =>
+                {
+                    sql.MigrationsAssembly(nameof(QuickFrameSSO));
+                    sql.ServerVersion(new Version(8, 0, 22), ServerType.MySql);
+                    sql.CharSetBehavior(CharSetBehavior.NeverAppend);
+                });
                 options.EnableTokenCleanup = true;//自动清理数据库令牌
             })
             .AddDeveloperSigningCredential();//开发时使用的秘钥(生产环境不建议使用)
             services.AddAuthentication();//添加认证服务
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();//添加视图的运行时编译(实时刷新视图的修改)
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();//添加视图的运行时编译(实时刷新视图的修改)
             services.AddControllersWithViews();//添加控制器视图
             services.Configure<CookiePolicyOptions>(options =>
             {
