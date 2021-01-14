@@ -72,7 +72,7 @@ namespace QuickFrameSSO
                         "https://www.onlyoned.com:9000",
 
                     },
-                    AccessTokenLifetime = 600,
+                    AccessTokenLifetime = 3600 * 24,
                     AllowedCorsOrigins =
                     {
                         "http://localhost:8000",
