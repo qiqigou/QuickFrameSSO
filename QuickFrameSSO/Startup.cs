@@ -35,6 +35,7 @@ namespace QuickFrameSSO
                 //使用Emit覆盖原有的ClaimTypes定义
                 //https://identityserver4.readthedocs.io/en/latest/topics/resources.html
                 options.EmitStaticAudienceClaim = true;
+                options.IssuerUri = "quickframesso";
             })
             .AddTestUsers(TestUsers.Users)
             .AddInMemoryApiScopes(Config.ApiScopes)
