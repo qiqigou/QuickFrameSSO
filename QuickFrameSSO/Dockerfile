@@ -18,5 +18,6 @@ RUN dotnet publish "QuickFrameSSO.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
+ENV PROXY="1"
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "QuickFrameSSO.dll"]

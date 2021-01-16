@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -86,6 +87,16 @@ namespace QuickFrameSSO
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+            }
+            if (Environment.GetEnvironmentVariable("PROXY") == "1")
+            {
+                var options = new ForwardedHeadersOptions
+                {
+                    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                };
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+                app.UseForwardedHeaders(options);
             }
             app.UseStaticFiles();
             app.UseRouting();
