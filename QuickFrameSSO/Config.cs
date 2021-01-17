@@ -60,6 +60,7 @@ namespace QuickFrameSSO
                     RedirectUris =
                     {
                         "http://localhost:8000/oauth2-redirect.html",
+                        "https://localhost:8000/oauth2-redirect.html",
                         "http://localhost/oauth2-redirect.html",
                         "https://onlyoned.com:9000/oauth2-redirect.html",
                         "https://www.onlyoned.com:9000/oauth2-redirect.html",
@@ -67,6 +68,7 @@ namespace QuickFrameSSO
                     PostLogoutRedirectUris =
                     {
                         "http://localhost:8000",
+                        "https://localhost:8000",
                         "http://localhost",
                         "https://onlyoned.com:9000",
                         "https://www.onlyoned.com:9000",
@@ -76,6 +78,7 @@ namespace QuickFrameSSO
                     AllowedCorsOrigins =
                     {
                         "http://localhost:8000",
+                        "https://localhost:8000",
                         "http://localhost",
                         "https://onlyoned.com:9000",
                         "https://www.onlyoned.com:9000"
