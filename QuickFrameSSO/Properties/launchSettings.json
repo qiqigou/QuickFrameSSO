@@ -5,7 +5,7 @@
             "launchBrowser": true,
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "PROXY": "1"
+                "PROXY": "0"
             },
             "applicationUrl": "https://localhost:5000"
         }
